@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { isStrongPassword, isError } from "validator"
+// import { isStrongPassword, isError } from "validator"
 import { debounce } from "lodash"
 import axios from "axios"
 import { toast } from "react-toastify"
@@ -83,7 +83,7 @@ export class SignUp extends Component {
                 email,
                 password,
             })
-
+console.log(result);
             this.setState({
                 firstName: "",
                 lastName: "",
@@ -102,6 +102,7 @@ export class SignUp extends Component {
                 progress: undefined,
             })
         } catch (e) {
+            console.log(e);
             toast.error(e.response.data, {
                 position: "top-center",
                 autoClose: 5000,

@@ -1,7 +1,8 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch, NavLink } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Navbar from "./component/Navbar/Navbar"
 import Home from "./component/Home"
+
 import Login from "./component/Login"
 import SignUp from "./component/SignUp/SignUp"
 
