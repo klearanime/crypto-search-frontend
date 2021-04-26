@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MainRouter from "./MainRouter"
 import { ToastContainer } from "react-toastify"
+import jwtDecode from "jwt-decode"
 import "react-toastify/dist/ReactToastify.css"
 // import axios from "axios"
 
@@ -11,9 +12,24 @@ export class App extends Component {
     user: null,
   }
 
+  componentDidMount() {
+    let getJwtToken = localStorage.getItem("jwtToken")
+    console.log(getJwtToken);
+    if (getJwtToken) {
+      const currentTime = Date.now() / 1000
+      console.log(currentTime);
+      let decodedJwtToken = jwtDecode(getJwtToken)
+      console.log(decodedJwtToken);
+      if (decodedJwtToken.exp < currentTime) {
+
+      } else {
+        this.handleUserLogin(decodedJwtToken)
+      }
+    }
+    
+  }
+
   handleUserLogin = (user) => {
-    console.log("13 from app");
-    console.log(user);
     this.setState({
       user: {
         email: user.email,
