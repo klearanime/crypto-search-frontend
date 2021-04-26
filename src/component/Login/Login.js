@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
+import jwtDecode from "jwt-decode"
 
 
 export class Login extends Component {
@@ -22,10 +23,13 @@ export class Login extends Component {
                 email: this.state.email,
                 password: this.state.password,
             })
-            console.log(result);
             localStorage.setItem("jwtToken", result.data.jwtToken)
+            
+            let decodedJWToken = jwtDecode(result.data.jwtToken)
+
+            this.props.handleUserLogin(decodedJWToken)
+            this.props.history.push("/crypto-home")
         } catch (e) {
-            console.log(e.response.data);
             toast.error(e.response.data, {
                 position: "top-center",
                 autoClose: 5000,
