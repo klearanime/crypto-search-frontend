@@ -23,6 +23,14 @@ export class SignUp extends Component {
         this.onChangeDebounce = debounce(this.onChangeDebounce, 2000)
     }
 
+    componentDidMount() {
+        let getJwtToken = localStorage.getItem("jwtToken")
+        if (getJwtToken) {
+            this.props.history.push("/crypto-home")
+        }
+
+    }
+
     handleSignup = (event) => {
         this.setState({
             [event.target.name]: event.target.value,

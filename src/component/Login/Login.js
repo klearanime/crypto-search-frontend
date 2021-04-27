@@ -10,6 +10,14 @@ export class Login extends Component {
         password: "",
     }
 
+    componentDidMount() {
+        let getJwtToken = localStorage.getItem("jwtToken")
+        if (getJwtToken) {
+            this.props.history.push("/crypto-home")
+        }
+
+    }
+
     handleLogin = (event) => {
         this.setState({
             [event.target.name]: event.target.value,

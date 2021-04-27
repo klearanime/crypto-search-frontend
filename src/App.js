@@ -14,14 +14,12 @@ export class App extends Component {
 
   componentDidMount() {
     let getJwtToken = localStorage.getItem("jwtToken")
-    console.log(getJwtToken);
     if (getJwtToken) {
       const currentTime = Date.now() / 1000
-      console.log(currentTime);
+      
       let decodedJwtToken = jwtDecode(getJwtToken)
-      console.log(decodedJwtToken);
       if (decodedJwtToken.exp < currentTime) {
-
+        this.handleUserLogout()
       } else {
         this.handleUserLogin(decodedJwtToken)
       }
@@ -37,6 +35,13 @@ export class App extends Component {
     })
   }
 
+  handleUserLogout = () => {
+    localStorage.removeItem("jwtToken")
+    this.setState({
+      user: null,
+    })
+  }
+
   render() {
     return (
       <>
@@ -44,6 +49,7 @@ export class App extends Component {
         <MainRouter
           user={this.state.user}
           handleUserLogin={this.handleUserLogin}
+          handleUserLogout={this.handleUserLogin}
         />
       </>
     )
